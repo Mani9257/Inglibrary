@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+        
+    stages {
+        stage('Build') {
+            steps {
+             sh'''
+               git config --global user.email "mmk9257@gmail.com"
+               git config --global user.name "Manikanta"
+               git clone https://github.com/Mani9257/Inglibrary.git
+               cd Inglibrary
+               git checkout develop
+               git branch
+               git pull https://github.com/Mani9257/Inglibrary.git master
+               git fetch https://github.com/Mani9257/Inglibrary.git develop
+               cat .git/HEAD
+               '''
+            }
+        }
+        stage('push'){
+            environment {
+                GIT_AUTH = credentials('git') 
+            }
+            steps{
+              sh'''
+                cd Inglibrary
+                git branch
+                git config --global credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
+                git push https://github.com/Mani9257/Inglibrary.git develop
+                cd .. &&  rm -rf *
+               '''
+            }
+        }
+    }
+}
