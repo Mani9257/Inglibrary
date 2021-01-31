@@ -104,14 +104,13 @@
 			</plugin>
 		</plugins>
 	</build>
-	<distributionManagement>
+  <distributionManagement>
   <snapshotRepository>
     <id>snapshots</id>
-    <url>http://3.16.40.192:8081/nexus/content/repositories/snapshots</url>
+    <url>http://18.224.202.190:8081/nexus/content/repositories/snapshots</url>
   </snapshotRepository>
 </distributionManagement>
-	
-	        <profiles>
+<profiles>
     <profile>
         <id>dev</id>
         <properties>
